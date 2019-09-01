@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/light_black"
+    tools:context=".fragments.ContactFragment">
+
+    <RelativeLayout
+        android:paddingRight="@dimen/_20sdp"
+        android:paddingLeft="@dimen/_20sdp"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp">
+
+        <TextView
+            android:text="Contacts"
+            style="@style/toolbar_title_text"/>
+        <ImageView
+            android:padding="@dimen/_5sdp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/ic_plus"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@drawable/blue_button_shape"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/black_top_rounder_corner_shape">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            >
+            <LinearLayout
+                android:id="@+id/tb_contacts"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_contact_tab"
+                    style="@style/contacts_tab_title_text"
+                    android:text="@string/contacts"
+                    android:textColor="@color/white"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tb_groups"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_groups_tab"
+                    style="@style/contacts_tab_title_text"
+                    android:text="@string/groups"
+                    android:textColor="@color/grey_text"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tb_blocked"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_blocked_tab"
+                    style="@style/contacts_tab_title_text"
+                    android:text="@string/blocked"
+                    android:textColor="@color/grey_text"/>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:paddingTop="@dimen/_20sdp"
+            android:background="@drawable/light_black_top_rounder_corner_shape"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.example.advance.callblocker.widgets.NonSwipeableViewPager
+                android:layout_width="match_parent"
+                android:id="@+id/viewpager"
+                android:layout_height="match_parent"/>
+
+
+
+        </FrameLayout>
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_120sdp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/_10sdp">
+
+    <FrameLayout
+        android:layout_width="@dimen/_90sdp"
+        android:layout_height="@dimen/_110sdp">
+        <LinearLayout
+            android:id="@+id/group_item"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:background="@drawable/group_bg"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <com.makeramen.roundedimageview.RoundedImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_group_photo"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/user_photo"
+                app:riv_border_color="#333333"
+                app:riv_corner_radius="@dimen/_10sdp"
+                app:riv_mutate_background="true" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/white"
+                tools:text="Group Title" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:visibility="gone"
+            android:padding="@dimen/_5sdp"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:background="@drawable/red_circle_button"
+            android:src="@drawable/ic_trash"/>
+
+
+    </FrameLayout>
+
+</LinearLayout>

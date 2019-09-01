@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    android:background="@drawable/bottom_menu_round_shape"
+    android:orientation="horizontal"
+
+    android:layout_margin="@dimen/_5sdp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_contacts"
+            style="@style/bottom_tab_button"
+            android:src="@drawable/ic_recent_selector" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_star"
+            style="@style/bottom_tab_button"
+            android:src="@drawable/ic_star_selector" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_dialer"
+            style="@style/bottom_tab_button"
+            android:src="@drawable/ic_dialpad_selector" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_settings"
+            style="@style/bottom_tab_button"
+            android:src="@drawable/ic_settings_selector" />
+    </LinearLayout>
+
+
+
+</LinearLayout>
