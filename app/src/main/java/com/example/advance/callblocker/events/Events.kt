@@ -4,4 +4,5 @@ import com.example.advance.callblocker.models.Contact
 
 class Events {
     data class ContactFavoriteEvent(var contact : Contact)
+    data class FavoriteContactRemoveEvent(var contact: Contact)
 }

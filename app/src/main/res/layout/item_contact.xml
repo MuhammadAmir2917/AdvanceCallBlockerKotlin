@@ -69,7 +69,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/fgView"
+        android:clickable="true"
         android:background="@color/light_black"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_80sdp"
@@ -97,10 +97,13 @@
                 />
 
             <LinearLayout
+                android:id="@+id/fgView"
+                android:layout_marginRight="@dimen/_10sdp"
                 android:paddingLeft="@dimen/_15sdp"
                 android:orientation="vertical"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
                 android:layout_weight="1">
                 <TextView
                     android:id="@+id/tv_name"

@@ -10,4 +10,6 @@ data class Contact(
     var email : String ="",
     var type : String ="",
     var fav : Int = 0,
-    var key : String = "") : Serializable{}
+    var key : String = "") : Serializable{
+    var sectionType : Int =0
+}

@@ -35,7 +35,7 @@ class ContactFragment : BaseFragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        baseActivity.addFragment(savedInstanceState , R.id.fm_contacts , ContactListFragment.invoke())
+        baseActivity.addFragment(savedInstanceState , R.id.fm_contacts , ContactListFragment.newInstance())
     }
 
 

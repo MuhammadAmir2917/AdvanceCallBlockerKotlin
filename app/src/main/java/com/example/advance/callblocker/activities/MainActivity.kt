@@ -13,6 +13,7 @@ import com.example.advance.callblocker.fragments.*
 import kotlinx.android.synthetic.main.bottom_menu.*
 import kotlinx.android.synthetic.main.content_main.*
 import com.example.advance.callblocker.base.BaseFragment
+import com.example.advance.callblocker.models.ContactsType
 
 
 class MainActivity : BaseActivity() {

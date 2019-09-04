@@ -13,17 +13,22 @@ import com.example.advance.callblocker.adapters.ContactsAdapter
 import com.example.advance.callblocker.base.BaseFragment
 import com.example.advance.callblocker.base.baseActivity
 import com.example.advance.callblocker.base.toast
+import com.example.advance.callblocker.callbacks.OnContactFavoriteChangeListener
 import com.example.advance.callblocker.callbacks.OnContactOptionClickListener
 import com.example.advance.callblocker.callbacks.OnItemClickListener
 import com.example.advance.callblocker.events.Events
 import com.example.advance.callblocker.events.GlobalBus
 import com.example.advance.callblocker.models.Contact
+import com.example.advance.callblocker.utils.Utils
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_favorite_list.*
 import org.greenrobot.eventbus.Subscribe
 
-class FavoriteListFragment : BaseFragment(), OnContactOptionClickListener {
+class FavoriteListFragment : BaseFragment(), OnContactOptionClickListener,
+    OnContactFavoriteChangeListener {
+
+
     override val layoutResources: Int
         get() = R.layout.fragment_favorite_list
 
@@ -58,6 +63,7 @@ class FavoriteListFragment : BaseFragment(), OnContactOptionClickListener {
         })
 
         adapter.setOnContactOptionClickListener(this)
+        adapter.setOnContactFavoriteChangListener(this)
     }
 
     private val observer  = object : Observer<Contact>{
@@ -79,11 +85,11 @@ class FavoriteListFragment : BaseFragment(), OnContactOptionClickListener {
 
     private fun showView() {
         if(adapter.itemCount==0){
-            rv_contacts.visibility = View.GONE
-            tv_msg.visibility = View.VISIBLE
+           Utils.goneViews(200,rv_contacts)
+            Utils.visibleViews(200,tv_msg)
         }else{
-            rv_contacts.visibility = View.VISIBLE
-            tv_msg.visibility = View.GONE
+            Utils.visibleViews(200,rv_contacts)
+            Utils.goneViews(200,tv_msg)
         }
     }
 
@@ -118,6 +124,16 @@ class FavoriteListFragment : BaseFragment(), OnContactOptionClickListener {
             adapter.removeItem(event.contact)
             showView()
 
+        }
+    }
+
+    override fun onContactFavoriteChange(contact: Contact) {
+        if(contact.fav==0) {
+            contactsRepository.updateFavoriteByContactId(baseActivity, contact.id , 0)
+            adapter.removeItem(contact)
+            val event = Events.FavoriteContactRemoveEvent(contact)
+            GlobalBus.invoke().post(event)
+            showView()
         }
     }
 }

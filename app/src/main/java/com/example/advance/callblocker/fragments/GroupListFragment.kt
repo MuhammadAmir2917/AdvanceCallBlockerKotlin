@@ -15,6 +15,7 @@ import com.example.advance.callblocker.base.baseActivity
 import com.example.advance.callblocker.base.log
 import com.example.advance.callblocker.callbacks.OnBackPressed
 import com.example.advance.callblocker.callbacks.OnItemClickListener
+import com.example.advance.callblocker.models.ContactsType
 import com.example.advance.callblocker.models.Group
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
@@ -47,7 +48,7 @@ class GroupListFragment : BaseFragment() , OnBackPressed{
 
         adapter.setOnItemClickListener(object : OnItemClickListener<Group>{
             override fun onItemClick(t: Group) {
-                baseActivity.replaceFragment(savedInstanceState , R.id.fm_groups , GroupContactListFragment.newInstance(t.id))
+                baseActivity.replaceFragment(savedInstanceState , R.id.fm_groups , ContactListFragment.newInstance(ContactsType.GROUP,t.id))
             }
         })
     }
