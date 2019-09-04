@@ -10,7 +10,7 @@ import android.R.id
 
 
 object ContactsLoader {
-    fun makeContactsCursor(context: Context) : Cursor?{
+    fun finAll(context: Context) : Cursor?{
 
         return context.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -20,7 +20,7 @@ object ContactsLoader {
 
 
 
-    fun makeGroupContactsCursor(context: Context , groupId : Long) : Cursor?{
+    fun findContactsByGroupId(context: Context, groupId : Long) : Cursor?{
         val groupURI = ContactsContract.Data.CONTENT_URI
         val projection = arrayOf(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
             ContactsContract.CommonDataKinds.GroupMembership.CONTACT_ID)
@@ -32,7 +32,7 @@ object ContactsLoader {
             + "=" + groupId, null, null)
     }
 
-    fun makeEmailCursor(context: Context , id : String) : Cursor?{
+    fun findEmailByContactId(context: Context, id : String) : Cursor?{
         return context.contentResolver.query(
             ContactsContract.CommonDataKinds.Email.CONTENT_URI,
             null,
@@ -43,7 +43,7 @@ object ContactsLoader {
 
     }
 
-    fun makeContactCursorById(context : Context , id: String) : Cursor?{
+    fun finContactById(context : Context, id: String) : Cursor?{
         return context.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null,
             ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = ?",
@@ -51,7 +51,7 @@ object ContactsLoader {
         )
     }
 
-    fun searchContactByNumberCursor(phone : String , context: Context) : Cursor?{
+    fun findContactByPhone(phone : String, context: Context) : Cursor?{
         val uri = Uri.withAppendedPath(
             ContactsContract.PhoneLookup.CONTENT_FILTER_URI,
             Uri.encode(phone))
@@ -73,7 +73,7 @@ object ContactsLoader {
 
     }
 
-    fun makeFavoriteContactCursor(context: Context) : Cursor?{
+    fun findByFavoriteContact(context: Context) : Cursor?{
 
         return context.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
@@ -81,13 +81,9 @@ object ContactsLoader {
             arrayOf("1") ,
             ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " DESC")
 
-        /*return context.contentResolver.query(
-            ContactsContract.Contacts.CONTENT_URI,
-            null, "${ContactsContract.Contacts.STARRED} = ?" , arrayOf("1") ,
-            ContactsContract.Contacts.DISPLAY_NAME + " ASC")*/
     }
 
-    fun makeAddOrRemoveFavContactCursor(context: Context , contactID: Long , i : Int){
+    fun updateFavoriteByContactId(context: Context, contactID: Long, i : Int){
         val values = ContentValues()
         values.put(ContactsContract.Contacts.STARRED , i)
         context.contentResolver.update(ContactsContract.Contacts.CONTENT_URI,
@@ -95,7 +91,7 @@ object ContactsLoader {
             arrayOf(contactID.toString()))
     }
 
-    fun makeGroupCoursor(context : Context) : Cursor?{
+    fun findAllGroup(context : Context) : Cursor?{
         val projection = arrayOf(
             ContactsContract.Groups._ID ,
             ContactsContract.Groups.TITLE

@@ -12,4 +12,5 @@
 
     <string name="group_name_count" formatted="false">%s (%d)</string>
     <string name="no_email">No email set</string>
+    <string name="no_favorite_contact_msg">No Favorite contacts found!</string>
 </resources>

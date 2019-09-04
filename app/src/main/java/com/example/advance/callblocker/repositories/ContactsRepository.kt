@@ -21,7 +21,7 @@ class ContactsRepository {
 
 
     fun loadContacts(context: Context, observer: Observer<Contact>) {
-        val cursor = ContactsLoader.makeContactsCursor(context)
+        val cursor = ContactsLoader.finAll(context)
         cursor?.let {cr->
             Observable.create(ObservableOnSubscribe<Contact> {
                 while (cr.moveToNext()) {
@@ -37,13 +37,13 @@ class ContactsRepository {
 
 
     fun loadContactByGroupId(context: Context , groupId : Long , observer: Observer<Contact>){
-        val cursor = ContactsLoader.makeGroupContactsCursor(context, groupId)
+        val cursor = ContactsLoader.findContactsByGroupId(context, groupId)
         cursor?.let { groupCursor->
 
           Observable.create(ObservableOnSubscribe <Contact>{
               while (groupCursor.moveToNext()){
                   val id = groupCursor.getString(groupCursor.getColumnIndex(ContactsContract.CommonDataKinds.GroupMembership.CONTACT_ID))
-                  val contactCursor = ContactsLoader.makeContactCursorById(context, id)
+                  val contactCursor = ContactsLoader.finContactById(context, id)
                   contactCursor?.let {cr->
 
                       while (cr.moveToNext()){
@@ -87,7 +87,7 @@ class ContactsRepository {
     }
 
     fun loadGroups(context: Context , observer: Observer<Group>){
-        val cursor = ContactsLoader.makeGroupCoursor(context)
+        val cursor = ContactsLoader.findAllGroup(context)
         cursor?.let { cr->
             Observable.create(ObservableOnSubscribe <Group>{
                 while (cr.moveToNext()){
@@ -114,7 +114,7 @@ class ContactsRepository {
 
     private fun getContactEmail(context: Context, id: Long): String {
         var email = ""
-        val cursor = ContactsLoader.makeEmailCursor(context, id.toString())
+        val cursor = ContactsLoader.findEmailByContactId(context, id.toString())
         cursor?.let {
             while (it.moveToNext()){
                 email = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
@@ -124,6 +124,24 @@ class ContactsRepository {
             it.close()
         }
         return email
+    }
+
+    fun loadFavoriteContacts(context : Context , observer: Observer<Contact>){
+        val coursor = ContactsLoader.findByFavoriteContact(context)
+        coursor?.let {cr->
+            Observable.create(ObservableOnSubscribe<Contact> {
+                while (cr.moveToNext()){
+                    it.onNext(getContact(context,cr))
+                }
+                it.onComplete()
+            }).subscribe(observer)
+
+            cr.close()
+        }
+    }
+
+    fun updateFavoriteByContactId(context: Context , contactId : Long , fav : Int){
+        ContactsLoader.updateFavoriteByContactId(context, contactId , fav)
     }
 
 

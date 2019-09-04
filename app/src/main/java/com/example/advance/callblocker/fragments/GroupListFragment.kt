@@ -70,9 +70,10 @@ class GroupListFragment : BaseFragment() , OnBackPressed{
     }
 
     override fun onBackPressed() {
-        if(GroupAdapter.isGroupDeleteShow){
+        if(GroupAdapter.isGroupDeleteShow)
             adapter.resetGroupItem()
-        }
+        else
+            baseActivity.onBackPressed()
     }
 
 

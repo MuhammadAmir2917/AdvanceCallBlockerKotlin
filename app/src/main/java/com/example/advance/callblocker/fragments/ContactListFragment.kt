@@ -10,14 +10,19 @@ import com.example.advance.callblocker.adapters.ContactsAdapter
 import com.example.advance.callblocker.base.BaseFragment
 import com.example.advance.callblocker.base.baseActivity
 import com.example.advance.callblocker.base.toast
+import com.example.advance.callblocker.callbacks.OnContactFavoriteChangeListener
 import com.example.advance.callblocker.callbacks.OnContactOptionClickListener
 import com.example.advance.callblocker.callbacks.OnItemClickListener
+import com.example.advance.callblocker.events.Events
+import com.example.advance.callblocker.events.GlobalBus
 import com.example.advance.callblocker.models.Contact
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import kotlinx.android.synthetic.main.fragment_contact_list.*
 
-class ContactListFragment : BaseFragment(), OnContactOptionClickListener {
+class ContactListFragment : BaseFragment(), OnContactOptionClickListener,
+    OnContactFavoriteChangeListener {
+
 
 
     companion object{
@@ -27,8 +32,6 @@ class ContactListFragment : BaseFragment(), OnContactOptionClickListener {
             instance ?: ContactListFragment().also { instance = it }
         }
     }
-
-
 
     private lateinit var adapter: ContactsAdapter
 
@@ -54,6 +57,7 @@ class ContactListFragment : BaseFragment(), OnContactOptionClickListener {
         })
 
         adapter.setOnContactOptionClickListener(this)
+        adapter.setOnContactFavoriteChangListener(this)
 
 
     }
@@ -90,6 +94,12 @@ class ContactListFragment : BaseFragment(), OnContactOptionClickListener {
 
     override fun onDeleteItemClick(contact: Contact) {
         baseActivity.toast("Delete")
+    }
+
+    override fun onContactFavoriteChange(contact: Contact) {
+        contactsRepository.updateFavoriteByContactId(baseActivity, contact.id , contact.fav)
+        val event = Events.ContactFavoriteEvent(contact)
+        GlobalBus.invoke().post(event)
     }
 }
 

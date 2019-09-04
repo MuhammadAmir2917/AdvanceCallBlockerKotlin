@@ -83,17 +83,23 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-     //   fragmentBackPress()
-        super.onBackPressed()
+       fragmentBackPress()
+
 
     }
 
     private fun fragmentBackPress() {
-        val fragments = supportFragmentManager.fragments
-        for (f in fragments) {
-            if (f != null && f is GroupListFragment)
-                if (GroupAdapter.isGroupDeleteShow)
+        if(GroupAdapter.isGroupDeleteShow) {
+            val fragments = supportFragmentManager.fragments
+            for (f in fragments) {
+                if (f != null && f is GroupListFragment) {
                     f.onBackPressed()
-        }
+                    return
+                }
+            }
+
+            super.onBackPressed()
+        }else
+            super.onBackPressed()
     }
 }
